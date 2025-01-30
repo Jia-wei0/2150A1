@@ -235,33 +235,16 @@ private static void handleEat(String line) {
             System.out.println("USER NOT FOUND");
             return;
         }
-
-        int fruitVeg = 0;
-        int dairy = 0;
-        int meat = 0;
-        int grain = 0;
-        int other = 0;
-
-        Node<Food> current = user.getMeals().getHead();
-        while (current != null) {
-            String category = current.data.getCategory();
-            switch (category) {
-                case "Fruit":
-                case "Vegetable": fruitVeg++; break;
-                case "Dairy": dairy++; break;
-                case "Meat": meat++; break;
-                case "Grain": grain++; break;
-                case "Other": other++; break;
-            }
-            current = current.next;
-        }
-
+    
+        int[] counts = new int[5]; // 0:F&V, 1:Dairy, 2:Meat, 3:Grain, 4:Other
+        user.calculateServings(counts);
+    
         System.out.println("Serving history for " + username + ":");
-        System.out.println("Fruit & Vegetable: " + fruitVeg);
-        System.out.println("Dairy: " + dairy);
-        System.out.println("Meat: " + meat);
-        System.out.println("Grain: " + grain);
-        System.out.println("Other: " + other);
+        System.out.println("Fruit & Vegetable: " + counts[0]);
+        System.out.println("Dairy: " + counts[1]);
+        System.out.println("Meat: " + counts[2]);
+        System.out.println("Grain: " + counts[3]);
+        System.out.println("Other: " + counts[4]);
     }
 
     private static void printMeals(String username) {

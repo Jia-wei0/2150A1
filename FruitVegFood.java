@@ -10,9 +10,12 @@ public class FruitVegFood extends SingleFood {
     public String getType() {
         return "FRUITVEG"; 
     }
+
+   // @Override
     public String getCategory() {
-        return subType.equals("FRUIT") ? "Fruit" : "Vegetable"; 
+        return "Fruit & Vegetable";
     }
+
     public String getDetails() {
         return subType + " " + description + " (" + calories + " calories)"; 
     }
