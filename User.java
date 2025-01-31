@@ -1,3 +1,10 @@
+// CLASS: User
+//
+// Author: Jiawei Fan, 7909503
+//
+// REMARKS: Manages user profiles and meal history
+// 
+//-----------------------------------------
 public class User {
     private String username;
     private LinkedList<Food> meals;
@@ -33,12 +40,20 @@ public class User {
         }
     }
 
+    //------------------------------------------------------
+    // countFood
+    //
+    // PURPOSE:    Count the food ingested by the user
+    // PARAMETERS:
+    //     food: Food
+    //     counts: Count the food
+    //------------------------------------------------------
     private void countFood(Food food, int[] counts) {
         if (food instanceof CompositeFood) {
             CompositeFood composite = (CompositeFood) food;
             Node<Food> compNode = composite.getComponents().getHead();
             while (compNode != null) {
-                countFood(compNode.data, counts); // 递归处理组件
+                countFood(compNode.data, counts);
                 compNode = compNode.next;
             }
         } else {

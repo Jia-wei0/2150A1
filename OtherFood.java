@@ -1,6 +1,11 @@
+// CLASS: OtherFood
+//
+// Author: Jiawei Fan, 7909503
+//
+// REMARKS: other food item
+// 
+//-----------------------------------------
 public class OtherFood extends SingleFood {
-    double protein;
-    double fat;
     double sugar;
 
     public OtherFood(int calories, double protein, double fat, double sugar, String description) {

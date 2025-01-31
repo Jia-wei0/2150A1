@@ -1,6 +1,11 @@
+// CLASS: DairyFood
+//
+// Author: Jiawei Fan, 7909503
+//
+// REMARKS: Dairy food item
+// 
+//-----------------------------------------
 public class DairyFood extends SingleFood {
-    double protein;
-    double fat;
     private String animal;
 
     public DairyFood(int calories, double protein, double fat, String animal, String description) {

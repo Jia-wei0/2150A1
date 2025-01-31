@@ -1,7 +1,21 @@
+// CLASS: LinkedList
+//
+// Author: Jiawei Fan, 7909503
+//
+// REMARKS: Manages food item
+// 
+//-----------------------------------------
 public class LinkedList<T> {
     private Node<T> head;
     private int size;
 
+    //------------------------------------------------------
+    // add
+    //
+    // PURPOSE:    Add element to list
+    // PARAMETERS:
+    //     data: element to add
+    //------------------------------------------------------
     public void add(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
@@ -14,6 +28,13 @@ public class LinkedList<T> {
         size++;
     }
 
+    //------------------------------------------------------
+    // find
+    //
+    // PURPOSE:    find data
+    // PARAMETERS:
+    //     key: The key to find
+    //------------------------------------------------------
     public T find(String key) {
         Node<T> current = head;
         while (current != null) {

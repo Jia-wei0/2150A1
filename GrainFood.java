@@ -1,6 +1,11 @@
+// CLASS: GrainFood
+//
+// Author: Jiawei Fan, 7909503
+//
+// REMARKS: Grain food item
+// 
+//-----------------------------------------
 public class GrainFood extends SingleFood {
-    double protein;
-    double fat;
     private String plant;
 
     public GrainFood(int calories, double protein, double fat, String plant, String description) {

@@ -1,6 +1,21 @@
+// CLASS: SingleFood
+//
+// Author: Jiawei Fan, 7909503
+//
+// REMARKS: Composite food items
+// 
+//-----------------------------------------
 public class CompositeFood extends Food {
     LinkedList<Food> components;
-
+    
+    //------------------------------------------------------
+    // CompositeFood
+    //
+    // PURPOSE:    Initialize composite food
+    // PARAMETERS:
+    //     description: Food description
+    //     components: List of component foods
+    //------------------------------------------------------
     public CompositeFood(String description, LinkedList<Food> components) {
         this.description = description;
         this.components = components;
@@ -17,8 +32,14 @@ public class CompositeFood extends Food {
         return total;
     }
 
-    public String getType() { return "COMPOSITE"; }
-    public String getCategory() { return "Composite"; }
+    public String getType() { 
+        return "COMPOSITE"; 
+    }
+
+    public String getCategory() { 
+        return "Composite"; 
+    }
+
     public String getDetails() {
         StringBuilder sb = new StringBuilder();
         Node<Food> current = components.getHead();
@@ -28,6 +49,7 @@ public class CompositeFood extends Food {
         }
         return sb.toString().trim();
     }
+
     public LinkedList<Food> getComponents() {
         return components;
     }

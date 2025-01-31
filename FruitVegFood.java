@@ -1,3 +1,10 @@
+// CLASS: FruitVegFood
+//
+// Author: Jiawei Fan, 7909503
+//
+// REMARKS: Fruit and vegetable food item
+// 
+//-----------------------------------------
 public class FruitVegFood extends SingleFood {
     private String subType;
 
@@ -11,7 +18,6 @@ public class FruitVegFood extends SingleFood {
         return "FRUITVEG"; 
     }
 
-   // @Override
     public String getCategory() {
         return "Fruit & Vegetable";
     }

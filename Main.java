@@ -1,3 +1,16 @@
+//-----------------------------------------
+// NAME		: Jiawei Fan 
+// STUDENT NUMBER	: 7909503
+// COURSE		: COMP 2150
+// INSTRUCTOR	: Heather Matheson
+// ASSIGNMENT	: assignment 1
+// QUESTION	: question 1      
+// 
+// REMARKS: Meal tracking system for recording user diets and nutritional information
+//
+//
+//-----------------------------------------
+
 import java.io.File;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -26,6 +39,13 @@ public class Main {
         }
     }
 
+    //------------------------------------------------------
+    // processLine
+    //
+    // PURPOSE: Process single input line
+    // PARAMETERS:
+    //   line: the input line
+    //------------------------------------------------------
     private static void processLine(String line) {
         if (line.startsWith("#")) {
             System.out.println(line);
@@ -46,6 +66,16 @@ public class Main {
         }
     }
 
+    //------------------------------------------------------
+    // handleNewProfile
+    //
+    // PURPOSE: Handle user profile creation
+    // PARAMETERS:
+    //   username: create username
+    // OUTPUT:
+    //   "NEW USER ADDED" if successful
+    //   "DUPLICATE USER NOT ADDED" if username exists
+    //------------------------------------------------------
     private static void handleNewProfile(String username) {
         if (userLib.find(username) == null) {
             userLib.add(new User(username));
@@ -55,6 +85,13 @@ public class Main {
         }
     }
 
+    //------------------------------------------------------
+    // handleNewFood
+    //
+    // PURPOSE: Handle food profile creation
+    // PARAMETERS:
+    //   line:  full command line start with "NEWFOOD"
+    //------------------------------------------------------
     private static void handleNewFood(String line) {
         String[] tokens = line.split("\\s+");
         if (tokens.length < 2) return;
@@ -66,6 +103,17 @@ public class Main {
         }
     }
 
+    //------------------------------------------------------
+    // handleNewSingleFood
+    //
+    // PURPOSE: Process single food item creation
+    // PARAMETERS:
+    //   tokens: tokenized command parts:
+    //      [0]NEWFOOD [1]SINGLE [2]TYPE [3]CALORIES
+    // OUTPUT:
+    //      "NEW FOOD ADDED" 
+    //      "FOOD UPDATED"
+    //------------------------------------------------------
     private static void handleNewSingleFood(String[] tokens) {
         String type = tokens[2];
         int calories = Integer.parseInt(tokens[3]);
@@ -156,6 +204,18 @@ public class Main {
         }
     }
 
+    //------------------------------------------------------
+    // handleNewCompositeFood
+    //
+    // PURPOSE: Process composite food item creation
+    // PARAMETERS:
+    //  tokens: tokenized command parts:
+    //      [0]NEWFOOD [1]COMPOSITE [2]NUM_COMPONENTS [3]DESCRIPTION
+    // OUTPUT:
+    //  "NEW FOOD ADDED" if successful
+    //  "FOOD UPDATED" if updating existing
+    //  "FAILURE TO ADD FOOD" if components missing
+    //------------------------------------------------------
     private static void handleNewCompositeFood(String[] tokens) {
         int numComponents = Integer.parseInt(tokens[2]);
         String description = tokens[3];
@@ -194,31 +254,40 @@ public class Main {
         }
     }
 
-    // Main.java
-private static void handleEat(String line) {
-    String[] parts = line.split("\\s+", 3); // 分割为3部分
-    if (parts.length < 3) {
-        System.out.println("INVALID COMMAND");
-        return;
+    //------------------------------------------------------
+    // handleEat
+    //
+    // PURPOSE: Record eat food event
+    // PARAMETERS:
+    //   line: full command line starting with "EAT"
+    // OUTPUT:
+    //   "MEAL RECORDED" if successful
+    //   "USER NOT FOUND" or "FOOD NOT FOUND" on failure
+    //------------------------------------------------------
+    private static void handleEat(String line) {
+        String[] parts = line.split("\\s+", 3);
+        if (parts.length < 3) {
+            System.out.println("INVALID COMMAND");
+            return;
+        }
+        String username = parts[1];
+        String foodDesc = parts[2];
+        
+        User user = userLib.find(username);
+        Food food = foodLib.find(foodDesc);
+        
+        if (user == null) {
+            System.out.println("USER NOT FOUND");
+            return;
+        }
+        if (food == null) {
+            System.out.println("FOOD NOT FOUND");
+            return;
+        }
+        
+        user.addMeal(food);
+        System.out.println("MEAL RECORDED");
     }
-    String username = parts[1];
-    String foodDesc = parts[2];
-    
-    User user = userLib.find(username);
-    Food food = foodLib.find(foodDesc);
-    
-    if (user == null) {
-        System.out.println("USER NOT FOUND");
-        return;
-    }
-    if (food == null) {
-        System.out.println("FOOD NOT FOUND");
-        return;
-    }
-    
-    user.addMeal(food);
-    System.out.println("MEAL RECORDED");
-}
 
     private static void printCalories(String username) {
         User user = userLib.find(username);
@@ -229,6 +298,15 @@ private static void handleEat(String line) {
         System.out.println("TOTAL CALORIES = " + user.calculateTotalCalories());
     }
 
+    //------------------------------------------------------
+    // printServings
+    //
+    // PURPOSE: Print food category counts for a user
+    // PARAMETERS:
+    //   username: target user
+    // OUTPUT:
+    //   Category counts or "USER NOT FOUND"
+    //------------------------------------------------------
     private static void printServings(String username) {
         User user = userLib.find(username);
         if (user == null) {
@@ -247,6 +325,15 @@ private static void handleEat(String line) {
         System.out.println("Other: " + counts[4]);
     }
 
+    //------------------------------------------------------
+    // printMeals
+    //
+    // PURPOSE: Print detailed meal history for a user
+    // PARAMETERS:
+    //   username: target user
+    // OUTPUT:
+    //   Meal history or "USER NOT FOUND"
+    //------------------------------------------------------
     private static void printMeals(String username) {
         User user = userLib.find(username);
         if (user == null) {
